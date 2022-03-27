@@ -1,24 +1,54 @@
 import React, { useState } from "react"
+import _ from "lodash"
 
 const TodoList = () => {
-    const [name, setName] = useState('Quang')
+    const [todo, setTodo] = useState('')
+    const [listTodo, setListTodo] = useState([
+        { id: 'todo1', name: 'Watching youtube' },
+        { id: 'todo2', name: 'Using facebook' },
+        { id: 'todo3', name: 'Reading book' }
+    ])
+
+    const randomIntFromInterval = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+
     const handleClickBtn = () => {
-        alert(name)
+        let todoId = randomIntFromInterval(4, 9999999999)
+        let todoItem = {
+            id: `todo${todoId}`, name: todo
+        }
+
+        let currentTodoList = _.clone(listTodo)
+        currentTodoList.push(todoItem)
+        setListTodo(currentTodoList)
+        // setListTodo([...listTodo, todoItem])
+    }
+
+    const handleDeleteTodo = (id) => {
+        let currentTodoList = _.clone(listTodo)
+        currentTodoList = currentTodoList.filter(item => item.id != id)
+        setListTodo(currentTodoList)
     }
     return (
         <div>
-            <label>Name </label>
+            <label>Todo's Name </label>
             <input
-                value={name}
+                value={todo}
                 type='text'
-                onChange={(event) => setName(event.target.value)}
+                onChange={(event) => setTodo(event.target.value)}
             ></input>
             <button
-                type='button'
+                type='submit'
                 onClick={() => handleClickBtn()}
             >Submit</button>
             <br></br>
-            Hello TodoList with name = {name}
+            <div>List todo: </div>
+            {listTodo.map((item, index) => {
+                return (
+                    <div key={item.id} onClick={() => handleDeleteTodo(item.id)}>{item.name}</div>
+                )
+            })}
         </div>
     )
 }
