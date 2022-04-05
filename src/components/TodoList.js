@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import _ from "lodash"
+import AddTodo from "./AddTodo"
+import DisplayTodo from "./DisplayTodo"
 
 const TodoList = () => {
     const [todo, setTodo] = useState('')
@@ -14,6 +16,10 @@ const TodoList = () => {
     }
 
     const handleClickBtn = () => {
+        if (!todo) {
+            alert("Todo's name is not empty")
+            return
+        }
         let todoId = randomIntFromInterval(4, 9999999999)
         let todoItem = {
             id: `todo${todoId}`, name: todo
@@ -23,6 +29,7 @@ const TodoList = () => {
         currentTodoList.push(todoItem)
         setListTodo(currentTodoList)
         // setListTodo([...listTodo, todoItem])
+        setTodo('')
     }
 
     const handleDeleteTodo = (id) => {
@@ -30,8 +37,10 @@ const TodoList = () => {
         currentTodoList = currentTodoList.filter(item => item.id != id)
         setListTodo(currentTodoList)
     }
+
     return (
         <div>
+            <AddTodo />
             <label>Todo's Name </label>
             <input
                 value={todo}
@@ -43,12 +52,9 @@ const TodoList = () => {
                 onClick={() => handleClickBtn()}
             >Submit</button>
             <br></br>
-            <div>List todo: </div>
-            {listTodo.map((item, index) => {
-                return (
-                    <div key={item.id} onClick={() => handleDeleteTodo(item.id)}>{item.name}</div>
-                )
-            })}
+            <DisplayTodo
+                listTodo={listTodo}
+            />
         </div>
     )
 }
