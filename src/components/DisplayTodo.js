@@ -1,7 +1,7 @@
 
 const DisplayTodo = (props) => {
-    const handleDeleteTodo = () => {
-
+    const deleteTodoFromChild = (id) => {
+        props.handleDeleteTodo(id)
     }
 
     const listTodo = props.listTodo
@@ -10,7 +10,7 @@ const DisplayTodo = (props) => {
             <div>List todo: </div>
             {listTodo.map((item, index) => {
                 return (
-                    <div key={item.id} onClick={() => handleDeleteTodo(item.id)}>{item.name}</div>
+                    <div key={item.id} onClick={() => deleteTodoFromChild(item.id)}>{item.name}</div>
                 )
             })}
         </div>

@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import TodoList from './components/TodoList';
+import Home from './components/Home';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         <p>
           Hello ReactApp with Quang
         </p>
-        <TodoList />
+        <Home />
         <a
           className="App-link"
           href="https://reactjs.org"

@@ -3,7 +3,7 @@ import _ from "lodash"
 import AddTodo from "./AddTodo"
 import DisplayTodo from "./DisplayTodo"
 
-const TodoList = () => {
+const Home = () => {
     const [todo, setTodo] = useState('')
     const [listTodo, setListTodo] = useState([
         { id: 'todo1', name: 'Watching youtube' },
@@ -40,23 +40,17 @@ const TodoList = () => {
 
     return (
         <div>
-            <AddTodo />
-            <label>Todo's Name </label>
-            <input
-                value={todo}
-                type='text'
-                onChange={(event) => setTodo(event.target.value)}
-            ></input>
-            <button
-                type='submit'
-                onClick={() => handleClickBtn()}
-            >Submit</button>
-            <br></br>
+            <AddTodo
+                todo={todo}
+                setTodo={setTodo}
+                handleClickBtn={handleClickBtn}
+            />
             <DisplayTodo
                 listTodo={listTodo}
+                handleDeleteTodo={handleDeleteTodo}
             />
         </div>
     )
 }
 
-export default TodoList
+export default Home

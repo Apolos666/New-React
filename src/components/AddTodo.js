@@ -1,8 +1,19 @@
 
-const AddTodo = () => {
+const AddTodo = (props) => {
+    const { todo, setTodo, handleClickBtn } = props
     return (
         <div>
-
+            <label>Todo's Name </label>
+            <input
+                value={todo}
+                type='text'
+                onChange={(event) => setTodo(event.target.value)}
+            ></input>
+            <button
+                type='submit'
+                onClick={() => handleClickBtn()}
+            >Submit</button>
+            <br></br>
         </div>
     )
 }
