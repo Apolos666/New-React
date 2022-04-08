@@ -12,7 +12,20 @@ const AddNewProduct = () => {
         let object = {
             name, price, size, color
         }
-        console.log(object)
+
+        let productList = localStorage.getItem("productList")
+        if (productList) {
+            let arr = JSON.parse(productList)
+            arr.push(object)
+            localStorage.setItem("productList", JSON.stringify(arr))
+        } else {
+            localStorage.setItem("productList", JSON.stringify([object]))
+        }
+
+        setName("")
+        setPrice(0)
+        setSize(0)
+        setColor("")
     }
 
     const handleHideShow = () => {
@@ -52,6 +65,13 @@ const AddNewProduct = () => {
                     ? <div onClick={() => handleHideShow()}>Hide this form</div>
                     : <div onClick={() => handleHideShow()}>Show this form</div>
             }
+
+            <div>
+                List products:
+                <div>
+                    {localStorage.getItem("productList")}
+                </div>
+            </div>
         </div>
     )
 }
